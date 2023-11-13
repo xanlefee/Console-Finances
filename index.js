@@ -89,24 +89,13 @@ var finances = [
 
 //total months
 
-console.log(finances.length);
+console.log("Total Months: " + finances.length);
 
 var totalmonths = finances.length;
 
-//netprofits or losses
-
-// let numbers = finances.filter(val => typeof val === “number”);
-
-// let sum = numbers.reduce((acc, val) => acc + val, 0);
+//netprofits or losses - moving up a value to ignore strings.
 
 
- //var totalprofits;
-
- //for (var i = 0; i < finances.length; i++) {
-
- // console.log (finances[i]);
- // return finances.N
- // }
 
   var sum = 0;
 for (var i = 0;  i < finances.length; i++) { 
@@ -116,6 +105,64 @@ for (var i = 0;  i < finances.length; i++) {
 }
 
 
-console.log(sum);
+console.log("Total profits/losses : " + sum);
 
-var total = 
+// total change in profit/losses month to month and find average... (total/number of months -1)
+
+
+//first part- the difference month to month
+
+const findDifference = (finances) => {
+   const differenceArray = [];
+   for(let i = 1; i < finances.length; i++){
+      differenceArray.push(Math.ceil(finances[i][1] - finances[i - 1][1]));
+   };
+   return differenceArray;
+} 
+console.log("month to month difference in profit/losses: " + findDifference(finances));
+
+var differences = findDifference(finances);
+
+
+
+//now adding the difference together as a total
+
+
+var sum2 = 0;
+
+for ( i = 0;  i < differences.length; i++) { 
+  sum2 = sum2 + differences[i]; 
+
+ 
+}
+
+// working out the total
+
+console.log("Total difference : " + sum2);
+//(total/number of months -1)  
+ var average = sum2/ (86-1);
+
+ // 2 decimal places
+
+ console.log(("Average profits/Losses: " + average.toFixed(2)));
+
+
+//Greatest increase in profits/losses, finding smallest and largest value in an array 
+
+var smallest = differences[0];
+  var largest = differences[0];
+
+  for ( i = 1; i < differences.length; i++) {
+   if (differences[i] > largest)
+    largest = differences[i];
+   else if (differences[i] < smallest)
+    smallest = differences[i];
+
+  }
+
+  //using  concatenation to print both the string and number values.
+
+  console.log("Greatest increase in profits/losses: " + finances[25][0] + " (" + largest + ")");
+  console.log("Greatest decrease in profits/losses : " + finances[44][0] + " (" + smallest + ")");
+
+
